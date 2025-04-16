@@ -3,6 +3,7 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
+import os
 
 def load_data(filepath):
     return pd.read_csv(filepath)
@@ -52,6 +53,9 @@ def main():
 
     # Train the model
     model = train_model(X_train, y_train)
+
+    # Ensure the 'data' directory exists
+    os.makedirs('models', exist_ok=True)
 
     # Save the model
     save_model(model, 'models/model.pkl')
