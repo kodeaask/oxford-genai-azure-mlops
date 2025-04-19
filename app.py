@@ -66,5 +66,12 @@ def main():
     print("Model accuracy is: ", score)
     return score
 
+# This is the entry point of the script
+# It will be executed when the script is run directly
+# but not when it is imported as a module
+# This is a common Python convention to allow or prevent parts of code from being run when the modules are imported
+# It is a good practice to include this in your scripts
+# to ensure that the script can be used as a module without executing the main code
+
 if __name__ == "__main__":
     main()
