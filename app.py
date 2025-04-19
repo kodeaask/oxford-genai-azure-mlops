@@ -3,6 +3,7 @@ import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import StandardScaler
 import os
 
 def load_data(filepath):
@@ -22,6 +23,13 @@ def preprocess_data(data):
     data['Store'] = le.fit_transform(data['Store'])
 
     return data
+
+# Standardize the data
+def scale_data(X_train, X_test):
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+    return X_train, X_test
 
 def split_data(data, target_column, test_size=0.2, random_state=42):
     X = data.drop(columns=target_column)
@@ -50,6 +58,9 @@ def main():
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = split_data(data, 'Fraudulent')
+
+    # Scale the data
+    X_train, X_test = scale_data(X_train, X_test)
 
     # Train the model
     model = train_model(X_train, y_train)
